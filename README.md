@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BA Agent
 
-## Getting Started
+**Business Analyst Agent** — AI agent tạo task BA từ feedback/requirements.
 
-First, run the development server:
+## Flow
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```mermaid
+flowchart TD
+    A["📄 Crawl Confluence\n(/crawl-confluence)"] --> B["🧠 Memories\n(docs/memories/)"]
+    C["📝 User viết yêu cầu\n(requirements/)"] --> D["🤖 Agent xử lý\n(/viet-task)"]
+    B --> D
+    D --> E["✅ Task hoàn chỉnh\n(docs/tasks/)"]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2 bước**:
+1. `/crawl-confluence` — crawl docs Confluence về `docs/memories/` (hiểu sản phẩm/module)
+2. `/viet-task` — đọc memories + requirements → tạo task vào `docs/tasks/`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cách sử dụng
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Bước 1: Crawl Confluence về memories
 
-## Learn More
+```
+/crawl-confluence 124190721 --children
+```
 
-To learn more about Next.js, take a look at the following resources:
+Agent crawl page + children → lưu `docs/memories/` → cập nhật INDEX
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Bước 2: Viết requirements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tạo file trong `requirements/`, viết bằng ngôn ngữ tự nhiên:
 
-## Deploy on Vercel
+```markdown
+# requirements/them-dark-mode.md
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Trang dashboard chỉ có giao diện sáng, user phản hồi dùng ban đêm
+bị chói. Muốn thêm dark mode, có toggle ở header, lưu preference.
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Bước 3: Tạo task
+
+```
+/viet-task requirements/them-dark-mode.md
+```
+
+Hoặc viết trực tiếp:
+
+```
+/viet-task User muốn thêm pagination cho dashboard khi có hơn 100 records
+```
+
+Agent đọc memories (style reference) + requirements → tạo task chuyên nghiệp → lưu `docs/tasks/`
+
+## Cấu trúc dự án
+
+```
+ba-agent/
+├── .agent/
+│   ├── rules/                  # Agent rules (always-on)
+│   ├── skills/                 # Agent skills (Matt Pocock, convert-doc)
+│   └── workflows/              # BA workflows
+│       ├── crawl-confluence.md     # Crawl Confluence → memories
+│       └── viet-task.md            # Requirements + memories → task
+├── templates/                  # Task templates (fallback khi chưa có memories)
+│   ├── task-default.md
+│   ├── task-bug-fix.md
+│   └── task-feature.md
+├── requirements/               # Input: user viết yêu cầu tự nhiên
+├── docs/
+│   ├── memories/               # Confluence docs đã crawl (style reference)
+│   ├── tasks/                  # Output: task đã tạo
+│   └── guide/                  # Hướng dẫn sử dụng
+├── .gemini/settings.json       # MCP config (gitignored)
+├── .env.local                  # Credentials (gitignored)
+└── CLAUDE.md
+```
+
+## MCP Integrations
+
+| MCP Server | Mục đích | Trạng thái |
+|-----------|---------|-----------|
+| [mcp-atlassian](https://github.com/sooperset/mcp-atlassian) | Đọc Confluence (READ-ONLY) | ✅ Connected |
+
+> **Confluence = READ-ONLY** — chỉ đọc, mọi output lưu local trong `docs/tasks/`
+
+> **Config**: `.gemini/settings.json` + `.env.local` (cả 2 gitignored)
