@@ -67,19 +67,20 @@ Sau đó đọc file memory vừa tạo.
 
 Từ nội dung đã chuẩn bị ở Bước 1:
 
-1. Liệt kê tất cả issues/feedback riêng biệt
+1. Liệt kê tất cả issues/feedback riêng biệt theo các chủ đề
 2. Nhóm theo chủ đề/module
-3. Xác định loại (bug-fix / feature) và priority (🔴/🟠/🟡) cho mỗi nhóm
+3. Xác định loại (bug-fix / feature) và priority (🔴 Rất cao | 🟠 Cao | 🟡 Trung bình) cho mỗi nhóm
 
 ### Bước 4: Viết từng task
 
 Với mỗi nhóm, tạo 1 file `docs/tasks/YYYY-MM-DD-<slug>.md`.
+Tạo task cần độc lập và riêng biệt, KHÔNG dùng "và" hay "&" để gộp các task.
 
 #### Format task chuẩn
 
 **Nguyên tắc format — BẮT BUỘC tuân thủ:**
 
-- **Title ngắn gọn** (3-6 từ): style giống memories (VD: "Quản lý bài viết", "Xuất bản", "Cấu hình viết bài"). KHÔNG viết câu mô tả dài.
+- **Title ngắn gọn** (3-6 từ): style giống memories (VD: "Quản lý bài viết", "Xuất bản", "Cấu hình viết bài"). KHÔNG viết câu mô tả dài. KHÔNG gộp các task vào cùng nhau bằng "và" hay "&".
 - **Sections dùng numbered list** (`1.`, `2.`, `3.`...) — KHÔNG dùng `## 1.`, `## 2.`.
 - **Sub-sections dùng bold** (`**6.1. Tên mục**`) — KHÔNG dùng `### 4.1.`.
 - **Chỉ dùng H1 cho title, H2 không cần** — toàn bộ structure nằm trong numbered list.
@@ -92,7 +93,7 @@ Với mỗi nhóm, tạo 1 file `docs/tasks/YYYY-MM-DD-<slug>.md`.
 task_id: TASK-YYYY-MMDD-<số>
 title: <Tiêu đề ngắn 3-6 từ>
 type: <bug-fix | feature>
-priority: <🔴 | 🟠 | 🟡>
+priority: <🔴 Rất cao | 🟠 Cao | 🟡 Trung bình>
 module: Viết bài tự động > <Sub-module>
 created_at: YYYY-MM-DD
 source: <Nguồn feedback>
@@ -116,9 +117,9 @@ Là một **<role>**, Tôi muốn **<action>**, Để **<benefit>**.
 
 <Mô tả ngắn gọn bối cảnh chung trong 1-2 câu>
 
-|  |  |
-| --- | --- |
-| **Vấn đề** | **Mô tả** |
+|                   |                     |
+| ----------------- | ------------------- |
+| **Vấn đề**        | **Mô tả**           |
 | <Vấn đề cụ thể 1> | <Chi tiết vấn đề 1> |
 | <Vấn đề cụ thể 2> | <Chi tiết vấn đề 2> |
 

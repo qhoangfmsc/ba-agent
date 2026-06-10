@@ -3,7 +3,7 @@ source: https://vietnixvn.atlassian.net/wiki/spaces/VNXMKT/pages/159088962
 page_id: 159088962
 title: Viết bài hàng loạt
 space: VNXMKT
-crawled_at: 2026-06-09
+crawled_at: 2026-06-10
 ---
 
 # Viết bài hàng loạt

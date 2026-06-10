@@ -3,7 +3,7 @@ source: https://vietnixvn.atlassian.net/wiki/spaces/VNXMKT/pages/159187096
 page_id: 159187096
 title: Cấu hình viết bài
 space: VNXMKT
-crawled_at: 2026-06-09
+crawled_at: 2026-06-10
 ---
 
 # Cấu hình viết bài

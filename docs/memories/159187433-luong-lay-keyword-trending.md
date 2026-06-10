@@ -3,7 +3,7 @@ source: https://vietnixvn.atlassian.net/wiki/spaces/VNXMKT/pages/159187433
 page_id: 159187433
 title: Luồng lấy keyword trending
 space: VNXMKT
-crawled_at: 2026-06-09
+crawled_at: 2026-06-10
 ---
 
 # Luồng lấy keyword trending

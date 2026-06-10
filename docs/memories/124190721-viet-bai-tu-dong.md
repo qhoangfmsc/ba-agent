@@ -3,7 +3,7 @@ source: https://vietnixvn.atlassian.net/wiki/spaces/VNXMKT/pages/124190721
 page_id: 124190721
 title: Viết bài tự động
 space: VNXMKT
-crawled_at: 2026-06-09
+crawled_at: 2026-06-10
 ---
 
 # Viết bài tự động
