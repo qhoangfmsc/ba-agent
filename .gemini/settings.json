@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "atlassian": {
+      "command": "uvx",
+      "args": ["mcp-atlassian"],
+      "env": {
+        "ATLASSIAN_URL": "https://vietnixvn.atlassian.net",
+        "ATLASSIAN_USERNAME": "docsviewer@vietnix.vn",
+        "ATLASSIAN_API_TOKEN": "ATATT3xFfGF0HzTA55ZGa_Mwx6jgFm0V1bPq6knthlrjd59WZXhZ5strF8HSGIpMBn7VQ_8FyhNMn36mC8LoZJgqYJN6v1waxbgB_GTh3I3dFt0_VaY3jUGfbMaALUguo9285LHXABT-iSj6-3aKgm73Y3bQyKRJD8qajZDBdymGQKkSNO7PoCQ=AC610450"
+      }
+    }
+  }
+}
