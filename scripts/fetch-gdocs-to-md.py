@@ -9,9 +9,9 @@ Ví dụ:
         "https://docs.google.com/document/d/1xxx/edit?tab=t.abc123" \
         requirements/feedback-seo.md
 
-Lưu ý:
-    Google Docs export API KHÔNG hỗ trợ export riêng từng tab.
-    Nếu URL chứa tab parameter, script sẽ cảnh báo user.
+Hỗ trợ tab:
+    Nếu URL chứa ?tab=t.xxx, script sẽ export NỘI DUNG CỦA TAB ĐÓ.
+    Mỗi tab cho ra nội dung khác nhau.
 """
 import re
 import sys
@@ -52,8 +52,8 @@ def extract_tab_id(url: str) -> str | None:
 def fetch_as_html(doc_id: str, tab_id: str | None = None) -> bytes:
     """Download Google Docs dưới dạng HTML.
 
-    Google Docs export API không hỗ trợ filter theo tab.
-    Dù truyền &tab=... thì vẫn export toàn bộ document.
+    Nếu có tab_id, export nội dung của tab đó.
+    Không có tab_id → export tab mặc định (tab đầu tiên).
     """
     export_url = f"https://docs.google.com/document/d/{doc_id}/export?format=html"
     if tab_id:
@@ -79,11 +79,8 @@ def main():
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Cảnh báo nếu URL có tab
     if tab_id:
-        print(f"⚠️  URL chứa tab: {tab_id}")
-        print(f"   Google Docs API không hỗ trợ export riêng tab.")
-        print(f"   Sẽ export TOÀN BỘ document. Nội dung các tab khác cũng sẽ có.")
+        print(f"📑 Export tab: {tab_id}")
 
     print(f"📥 Fetching Google Docs: {doc_id}...")
     try:
